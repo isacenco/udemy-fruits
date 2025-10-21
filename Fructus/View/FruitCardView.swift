@@ -11,20 +11,22 @@ struct FruitCardView: View {
     // MARK: - PROPERTIES
     @State private var isAnimating: Bool = false
     
+    var fruit: Fruit
+    
     // MARK: - BODY
     var body: some View {
         ZStack {
             //Color.clear
             VStack(spacing: 20) {
                 // FRUIT: IMAGE
-                Image("blueberry")
+                Image(fruit.image)
                     .resizable()
                     .scaledToFit()
                     .shadow(color: Color(red: 0, green: 0, blue: 0, opacity: 0.15), radius: 8, x: 6, y: 8)
                 
                 // FRUIT: TITLE
                 
-                Text("Blueberry")
+                Text(fruit.title)
                     .foregroundColor(Color.white)
                     .font(.largeTitle)
                     .fontWeight(.heavy)
@@ -33,7 +35,7 @@ struct FruitCardView: View {
                 
                 // FRUIT: HEADLINT
                 
-                Text("Blueberries are sweet, nutritious and wildly popupar fruit all around the world.")
+                Text(fruit.headline)
                     .foregroundColor(Color.white)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 16)
@@ -48,7 +50,7 @@ struct FruitCardView: View {
             }
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
-        .background(LinearGradient(gradient: Gradient(colors: [Color.colorBlueberryLight, Color.colorBlueberryDark]), startPoint: .top, endPoint: .bottom))
+        .background(LinearGradient(gradient: Gradient(colors: fruit.gradientColors), startPoint: .top, endPoint: .bottom))
         
         .cornerRadius(20)
         .padding(.horizontal, 20)
@@ -57,5 +59,5 @@ struct FruitCardView: View {
 
 // MARK: - PROPERTIES
 #Preview(traits: .fixedLayout(width: 320, height: 640)) {
-    FruitCardView()
+    FruitCardView(fruit: fruitsData[1])
 }
